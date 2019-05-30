@@ -1,3 +1,5 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -6,5 +8,13 @@ module.exports = {
         data: `@import 'variables';\n`
       }
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        openAnalyzer: false,
+      })
+    ]
   }
 }

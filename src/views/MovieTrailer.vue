@@ -56,19 +56,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-
-import { google, youtube_v3 } from 'googleapis';
-
-const youtube = google.youtube({
-  version: 'v3',
-  auth: 'AIzaSyCf7-i07F-yVYR02mKM_LN9HxvIuXbJA_g',
-});
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    video?: youtube_v3.Schema$VideoSnippet;
-  }
-}
+import axios from 'axios';
 
 export default Vue.extend({
   data: () => ({
@@ -83,17 +71,17 @@ export default Vue.extend({
       this.video = undefined;
 
       try {
-        const result = await youtube.videos.list({ id, part: 'snippet' });
+        const { data: { items: [{snippet}]}} =
+          await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+              id,
+              part: 'snippet',
+              key: 'AIzaSyCf7-i07F-yVYR02mKM_LN9HxvIuXbJA_g',
+            },
+        });
 
-        if (
-          result
-          && result.data
-          && result.data.items
-          && result.data.items[0]
-          && result.data.items[0].snippet
-        ) {
-          this.video = result.data.items[0].snippet as any;
-        }
+        this.video = snippet;
+
       } catch (err) {
         this.error = err;
       }
