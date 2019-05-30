@@ -1,5 +1,22 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+class CopyIndexOutputFile {
+
+  constructor(...filenames) {
+    this.filenames = filenames
+  }
+
+  apply(compiler) {
+    compiler.hooks.emit.tap('COPY_INDEX_OUTPUT_FILE', compilation => {
+      if(compilation.assets['index.html']) {
+        this.filenames.forEach(filename => {
+          compilation.assets[filename] = compilation.assets['index.html']
+        })
+      }
+    })
+  }
+}
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -14,7 +31,8 @@ module.exports = {
       new BundleAnalyzerPlugin({
         analyzerMode: 'static',
         openAnalyzer: false,
-      })
+      }),
+      new CopyIndexOutputFile('200.html')
     ]
   }
 }

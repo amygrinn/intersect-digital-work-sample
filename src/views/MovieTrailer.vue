@@ -4,7 +4,7 @@
       <iframe
         class="video"
         type="text/html"
-        :src="`http://www.youtube.com/embed/${$route.params.id}?enablejsapi=1`"
+        :src="`https://www.youtube.com/embed/${$route.params.id}?enablejsapi=1`"
         frameborder="0">
       </iframe>
     </div>
