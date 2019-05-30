@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - 10
+addons:
+  apt:
+    packages:
+      # Required by cypress
+      - libgconf-2-4
+
+cache:
+  npm: true
+  directories:
+    # Required by cypress
+    - ~/.cache
+
+install: npm ci
+
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: dist
+  on:
+    branch: master
