@@ -43,7 +43,7 @@
     </path>
   </svg>
 
-  <p :style="`transform: translateX(${left ? '' : '-'}15px);`">
+  <p :style="`transform: translateX(${left ? '' : '-'}10px);`">
     <slot></slot>
   </p>
 
@@ -58,7 +58,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100px;
+  width: 120px;
   z-index: 100;
 }
 

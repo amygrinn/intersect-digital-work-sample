@@ -40,7 +40,7 @@
     </div>
     <div id="app-router-view">
       <transition :name="transitionName" mode="out-in">
-        <router-view :key="$route.params.name"></router-view>
+        <router-view :key="$route.params.id"></router-view>
       </transition>
     </div>
   </div>
@@ -51,7 +51,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   margin: 0;
   background-color: $primary;
 }
@@ -114,7 +114,7 @@ path {
 }
 
 #app-router-view {
-  margin: 120px;
+  margin: 140px;
 }
 
 @media #{$phablet} {
@@ -164,8 +164,8 @@ export default Vue.extend({
     },
   },
   created() {
-    if (this.$route.params.name) {
-      this.setTrailerIndex(this.$route.params.name);
+    if (this.$route.params.id) {
+      this.setTrailerIndex(this.$route.params.id);
     }
   },
   methods: {
@@ -178,8 +178,7 @@ export default Vue.extend({
       if (anim) {
         anim.beginElement();
       }
-      this.$router.push('/movie-trailer/' + this.previousTrailer.name);
-      // this.$router.push({ name: this.previousTrailer.name });
+      this.$router.push('/movie-trailer/' + this.previousTrailer.id);
     },
     navigateRight() {
       this.transitionName = 'slide-right';
@@ -187,19 +186,18 @@ export default Vue.extend({
       if (anim) {
         anim.beginElement();
       }
-      this.$router.push('/movie-trailer/' + this.nextTrailer.name);
-      // this.$router.push({ name: this.nextTrailer.name });
+      this.$router.push('/movie-trailer/' + this.nextTrailer.id);
     },
-    setTrailerIndex(name: string) {
-      const trailerIndex = this.trailers.findIndex((trailer) => trailer.name === name);
+    setTrailerIndex(id: string) {
+      const trailerIndex = this.trailers.findIndex((trailer) => trailer.id === id);
       if (trailerIndex >= 0) {
         this.trailerIndex = trailerIndex;
       }
     },
   },
   watch: {
-    '$route.params.name'(name) {
-      this.setTrailerIndex(name);
+    '$route.params.id'(id) {
+      this.setTrailerIndex(id);
     },
   },
 });

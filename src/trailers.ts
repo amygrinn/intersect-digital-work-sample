@@ -1,27 +1,27 @@
 export interface Trailer {
-  name: string;
+  id: string;
   label: string;
 }
 
 export const trailers: Trailer[] = [
   {
-    name: 'rocketman',
+    id: 'S3vO8E2e6G0',
     label: 'Rocketman',
   },
   {
-    name: 'godzilla',
+    id: 'QFxN2oDKk0E',
     label: 'Godzilla',
   },
   {
-    name: 'avengers',
+    id: 'TcMBFSGVi1c',
     label: 'Avengers',
   },
   {
-    name: 'pokemon',
+    id: '1roy4o4tqQM',
     label: 'Pokemon',
   },
   {
-    name: 'booksmart',
+    id: 'Uhd3lo_IWJc',
     label: 'Booksmart',
   },
 ];

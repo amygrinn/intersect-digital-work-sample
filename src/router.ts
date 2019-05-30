@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import MovieTrailer from './views/MovieTrailer.vue';
+import { trailers } from './trailers';
 
 Vue.use(Router);
 
@@ -10,10 +11,10 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/movie-trailer/rocketman',
+      redirect: `/movie-trailer/${trailers[0].id}`,
     },
     {
-      path: '/movie-trailer/:name',
+      path: '/movie-trailer/:id',
       name: 'movie-trailer',
       component: MovieTrailer,
     },
