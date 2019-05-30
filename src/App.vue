@@ -1,37 +1,207 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="container">
+    <arrow right @click="navigateRight">{{ nextTrailer.label }}</arrow>
+    <arrow left @click="navigateLeft">{{ previousTrailer.label }}</arrow>
+    <div>
+      <svg class="header" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0,0 q50,0 100,0 Z">
+          <animate
+            attributeName="d"
+            to="M0,0 Q50,80 100,0 Z"
+            fill="freeze"
+            dur="200ms"/>
+          <animate
+            ref="slide-right-header-animation"
+            attributeName="d"
+            begin="js"
+            dur="600ms"
+            calcMode="spline"
+            keySplines="0.5 0 0.5 1; 0.5 0 0.5 1"
+            values="
+              M0,0 Q50,80 100,0 Z;
+              M0,0 Q0,80 100,0 Z;
+              M0,0 Q50,80 100,0 Z
+            "/>
+          <animate
+            ref="slide-left-header-animation"
+            attributeName="d"
+            begin="js"
+            dur="600ms"
+            calcMode="spline"
+            keySplines="0.5 0 0.5 1; 0.5 0 0.5 1"
+            values="
+              M0,0 Q50,80 100,0 Z;
+              M0,0 Q100,80 100,0 Z;
+              M0,0 Q50,80 100,0 Z
+            "/>
+        </path>
+      </svg>
+      <h1 class="header header-txt drop-in" @click="gotoHome">Work Sample</h1>
     </div>
-    <router-view/>
+    <div id="app-router-view">
+      <transition :name="transitionName" mode="out-in">
+        <router-view :key="$route.params.name"></router-view>
+      </transition>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  background-color: $primary;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: darkblue;
-    }
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 25vh;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5vh;
+  z-index: 90;
+  pointer-events: none;
+}
+
+.header-txt {
+  height: 60px;
+  margin-bottom: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  margin-top: 10px;
+  color: $primary;
+}
+
+path {
+  fill: $accent-light;
+}
+
+.drop-in {
+  animation: _drop-in .5s;
+}
+
+.slide-left-enter-active, .slide-right-enter-active {
+  transition: all 0.2s ease-in;
+}
+
+.slide-left-leave-active, .slide-right-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-left-enter, .slide-left-leave-to,
+.slide-right-enter, .slide-right-leave-to {
+  opacity: 0;
+}
+
+.slide-left-enter, .slide-right-leave-to {
+  transform: translateX(-25%);
+}
+
+.slide-left-leave-to, .slide-right-enter {
+  transform: translateX(25%);
+}
+
+#app-router-view {
+  margin: 120px;
+}
+
+@media #{$phablet} {
+  .header-txt {
+    font-size: 24px;
+  }
+
+  #app-router-view {
+    margin-left: 16px;
+    margin-right: 16px;
   }
 }
+
+@keyframes _drop-in {
+  0% {
+    transform: translate(-50%, -25vh);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 </style>
 
 <script lang="ts">
 import Vue from 'vue';
+
+import Arrow from './components/Arrow.vue';
+
+import { Trailer, trailers } from './trailers';
+
 export default Vue.extend({
-
+  components: {
+    Arrow,
+  },
+  data: () => ({
+    trailerIndex: 0,
+    trailers,
+    transitionName: '',
+  }),
+  computed: {
+    nextTrailer(): Trailer {
+      return this.trailers[(this.trailerIndex + 1) % this.trailers.length];
+    },
+    previousTrailer(): Trailer {
+      return this.trailers[(this.trailers.length + this.trailerIndex - 1) % this.trailers.length];
+    },
+  },
+  created() {
+    if (this.$route.params.name) {
+      this.setTrailerIndex(this.$route.params.name);
+    }
+  },
+  methods: {
+    gotoHome() {
+      this.$router.push('/');
+    },
+    navigateLeft() {
+      this.transitionName = 'slide-left';
+      const anim = this.$refs['slide-left-header-animation'] as any;
+      if (anim) {
+        anim.beginElement();
+      }
+      this.$router.push('/movie-trailer/' + this.previousTrailer.name);
+      // this.$router.push({ name: this.previousTrailer.name });
+    },
+    navigateRight() {
+      this.transitionName = 'slide-right';
+      const anim = this.$refs['slide-right-header-animation'] as any;
+      if (anim) {
+        anim.beginElement();
+      }
+      this.$router.push('/movie-trailer/' + this.nextTrailer.name);
+      // this.$router.push({ name: this.nextTrailer.name });
+    },
+    setTrailerIndex(name: string) {
+      const trailerIndex = this.trailers.findIndex((trailer) => trailer.name === name);
+      if (trailerIndex >= 0) {
+        this.trailerIndex = trailerIndex;
+      }
+    },
+  },
+  watch: {
+    '$route.params.name'(name) {
+      this.setTrailerIndex(name);
+    },
+  },
 });
-</script>
 
+</script>

@@ -3,3 +3,11 @@ $primary-dark: #BBB5BD;
 $secondary: #CDD3CE;
 $accent: #A713B5;
 $accent-light: #AA6DA3;
+$danger: red;
+
+$phone: "only screen and (max-width : 480px) and (orientation: portrait)";
+$phoneSide: "only screen and (max-width: 480px) and (orientation: landscape)";
+$phablet: "only screen and (max-width : 839px) and (orientation: portrait)";
+$phabletSide: "only screen and (max-width : 839px) and (orientation: landscape)";
+$tablet: "only screen and (max-width: 1024px) and (orientation: portrait)";
+$tabletSide: "only screen and (max-width: 1024) and (orientation: portrait)";
