@@ -22,8 +22,16 @@
     font-weight: bold;
     color: #2c3e50;
     &.router-link-exact-active {
-      color: #42b983;
+      color: darkblue;
     }
   }
 }
 </style>
+
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+
+});
+</script>
+
