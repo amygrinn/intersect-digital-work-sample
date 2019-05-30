@@ -1,4 +1,8 @@
-# intersect-digital-work-sample
+[![Build Status](https://travis-ci.org/tylergrinn/intersect-digital-work-sample.svg?branch=master)](https://travis-ci.org/tylergrinn/intersect-digital-work-sample)
+
+# Intersect Digital Work Sample
+
+# Tyler Grinn
 
 ## Project setup
 ```
