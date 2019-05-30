@@ -1,43 +1,44 @@
 [![Build Status](https://travis-ci.org/tylergrinn/intersect-digital-work-sample.svg?branch=master)](https://travis-ci.org/tylergrinn/intersect-digital-work-sample)
 
+[![dependencies Status](https://david-dm.org/tylergrinn/intersect-digital-work-sample/status.svg)](https://david-dm.org/tylergrinn/intersect-digital-work-sample)
+
+[![devDependencies Status](https://david-dm.org/tylergrinn/intersect-digital-work-sample/dev-status.svg)](https://david-dm.org/tylergrinn/intersect-digital-work-sample?type=dev)
+
 # Intersect Digital Work Sample
 
 # Tyler Grinn
 
 ## Project setup
 ```
-yarn install
+npm ci
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+npm run build
 ```
 
 ### Run your tests
 ```
-yarn run test
+npm run test
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+npm run lint
 ```
 
 ### Run your end-to-end tests
 ```
-yarn run test:e2e
+npm run test:e2e
 ```
 
 ### Run your unit tests
 ```
-yarn run test:unit
+npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
