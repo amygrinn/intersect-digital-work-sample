@@ -8,8 +8,13 @@
         frameborder="0">
       </iframe>
     </div>
-    <h1>{{video.localized.title}}</h1>
-    <p>{{video.localized.description}}</p>
+    <h1>{{video.snippet.localized.title}}</h1>
+    <div class="statistics">
+      <h4>{{video.statistics.viewCount}} views</h4>
+      <h4>Likes: {{video.statistics.likeCount}}</h4>
+      <h4>Dislikes: {{video.statistics.dislikeCount}}</h4>
+    </div>
+    <p>{{video.snippet.localized.description}}</p>
   </div>
   <div v-else>
     <h1>Movie Trailer not Found</h1>
@@ -53,6 +58,18 @@
     height: 100%;
   }
 
+  .statistics {
+    display: flex;
+  }
+
+  .statistics h4 {
+    margin: 8px;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: $secondary;
+    font-family: 'Montserrat', sans-serif;
+  }
+
   @media only screen and (orientation: landscape) {
     .video-player {
       width: 50%;
@@ -80,16 +97,16 @@ export default Vue.extend({
       this.video = undefined;
 
       try {
-        const { data: { items: [{snippet}]}} =
+        const { data: { items: [video]}} =
           await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
               id,
-              part: 'snippet',
+              part: 'snippet,statistics',
               key: 'AIzaSyCf7-i07F-yVYR02mKM_LN9HxvIuXbJA_g',
             },
         });
 
-        this.video = snippet;
+        this.video = video;
 
       } catch (err) {
         this.error = err;
