@@ -4,6 +4,7 @@
     <arrow left @click="navigateLeft">{{ previousTrailer.label }}</arrow>
     <div>
       <svg class="header" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <rect class="header-background" x="0" y="0"/>
         <path d="M0,0 q50,0 100,0 Z">
           <animate
             attributeName="d"
@@ -75,6 +76,13 @@ body {
   pointer-events: none;
 }
 
+.header-background {
+  fill: $primary;
+  stroke: none;
+  width: 100px;
+  height: 40px;
+}
+
 .header-txt {
   height: 60px;
   margin-bottom: 0;
@@ -125,6 +133,10 @@ path {
   #app-router-view {
     margin-left: 16px;
     margin-right: 16px;
+  }
+
+  .header-background {
+    height: 70px;
   }
 }
 

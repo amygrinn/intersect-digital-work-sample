@@ -28,12 +28,12 @@
   }
 
   p {
-    overflow-x: scroll;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-family: 'Montserrat', sans-serif;
   }
 
   .video-player {
-    width: 100%;
     position: relative;
   }
 
