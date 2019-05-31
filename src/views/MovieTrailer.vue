@@ -23,6 +23,15 @@
     padding: 12px;
   }
 
+  h1 {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  p {
+    overflow-x: scroll;
+    font-family: 'Montserrat', sans-serif;
+  }
+
   .video-player {
     width: 100%;
     position: relative;
