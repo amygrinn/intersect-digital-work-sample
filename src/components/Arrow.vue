@@ -54,11 +54,10 @@
 #arrow-container {
   position: fixed;
   padding: 20px;
-  top: 40%;
+  top: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 120px;
   z-index: 100;
 }
 
@@ -83,12 +82,13 @@ path {
 }
 
 .right-arrow {
-  right: 0;
+  left: 100vw;
+  transform: translateX(-100%);
 }
 
 @media #{$phablet}, #{$phabletSide} {
   #arrow-container {
-    top: 10%;
+    top: 10vh;
     display: flex;
     padding: 0;
   }
