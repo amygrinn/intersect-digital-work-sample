@@ -8,24 +8,29 @@
         frameborder="0">
       </iframe>
     </div>
-    <h1>{{video.snippet.localized.title}}</h1>
+    <h1>{{video.title}}</h1>
     <div class="statistics">
-      <h4>{{video.statistics.viewCount}} views</h4>
-      <h4>Likes: {{video.statistics.likeCount}}</h4>
-      <h4>Dislikes: {{video.statistics.dislikeCount}}</h4>
+      <div class="statistic">
+        <h4>{{video.statistics.viewCount}} views</h4>
+      </div>
+      <div class="statistic">
+        <img :src="require('@/assets/thumbs-up.svg')">
+        <h4>{{video.statistics.likeCount}}</h4>
+      </div>
+      <div class="statistic">
+        <img :src="require('@/assets/thumbs-down.svg')">
+        <h4>{{video.statistics.dislikeCount}}</h4>
+      </div>
     </div>
-    <p>{{video.snippet.localized.description}}</p>
-  </div>
-  <div v-else>
-    <h1>Movie Trailer not Found</h1>
-    <p>{{error}}</p>
+    <p>{{video.description}}</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 
   .movie-trailer-container {
-    padding: 12px;
+    width: 50%;
+    margin: auto;
   }
 
   h1 {
@@ -60,20 +65,31 @@
 
   .statistics {
     display: flex;
+    width: 100%;
+    flex-wrap: wrap;
   }
-
-  .statistics h4 {
-    margin: 8px;
+  
+  .statistic {
+    display: flex;
     border-radius: 8px;
     padding: 8px;
-    background-color: $secondary;
-    font-family: 'Montserrat', sans-serif;
+    background-color: $accent;
+    margin: 8px;
   }
 
-  @media only screen and (orientation: landscape) {
-    .video-player {
-      width: 50%;
-      margin: auto;
+  .statistic img {
+    padding-right: 8px;
+  }
+
+  .statistic h4 {
+    margin: 2px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+  }
+
+  @media #{$phablet} {
+    .movie-trailer-container {
+      width: 100%;
     }
   }
 
@@ -85,37 +101,9 @@ import Vue from 'vue';
 import axios from 'axios';
 
 export default Vue.extend({
-  data: () => ({
-    video: undefined,
-    error: '',
-  }),
-  created() {
-    this.loadVideo(this.$route.params.id);
-  },
-  methods: {
-    async loadVideo(id: string) {
-      this.video = undefined;
-
-      try {
-        const { data: { items: [video]}} =
-          await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-            params: {
-              id,
-              part: 'snippet,statistics',
-              key: 'AIzaSyCf7-i07F-yVYR02mKM_LN9HxvIuXbJA_g',
-            },
-        });
-
-        this.video = video;
-
-      } catch (err) {
-        this.error = err;
-      }
-    },
-  },
-  watch: {
-    '$route.params.id'(to, from) {
-      this.loadVideo(to);
+  computed: {
+    video() {
+      return this.$store.state.videos[this.$route.params.id];
     },
   },
 });

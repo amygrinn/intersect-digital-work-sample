@@ -137,7 +137,7 @@
   left: 12px;
   width: 32px;
   height: 32px;
-  z-index: 101;
+  z-index: 5;
   cursor: pointer;
   transition: left 300ms ease-in-out;
 }

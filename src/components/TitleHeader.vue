@@ -46,6 +46,7 @@
   width: 100vw;
   height: 60px;
   pointer-events: none;
+  z-index: 2;
 }
 
 .header-background {
@@ -66,6 +67,7 @@ h1 {
   width: 100vw;
   text-align: center;
   animation: _drop-in .5s;
+  z-index: 2;
 }
 
 path {

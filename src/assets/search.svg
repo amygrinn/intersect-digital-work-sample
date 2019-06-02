@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+
+<mask id="mask">
+  <circle cx="35" cy="35" r="25" fill="white"/>
+  <circle cx="35" cy="35" r="16" fill="black"/>
+</mask>
+
+<circle cx="35" cy="35" r="25" fill="black" mask="url(#mask)"/>
+<line x1="52" x2="80" y1="52" y2="80" stroke-width="8" stroke="black"/>
+
+</svg>

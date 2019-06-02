@@ -9,6 +9,7 @@
       </transition>
     </div>
     <sidebar></sidebar>
+    <search></search>
   </div>
 </template>
 
@@ -67,6 +68,7 @@ import Vue from 'vue';
 import Arrow from './components/Arrow.vue';
 import Sidebar from './components/Sidebar.vue';
 import TitleHeader from './components/TitleHeader.vue';
+import Search from './components/Search.vue';
 
 import { Trailer, trailers } from './trailers';
 
@@ -75,6 +77,7 @@ export default Vue.extend({
     Arrow,
     Sidebar,
     TitleHeader,
+    Search,
   },
   data: () => ({
     trailerIndex: 0,

@@ -58,7 +58,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+  z-index: 3;
 }
 
 p {
