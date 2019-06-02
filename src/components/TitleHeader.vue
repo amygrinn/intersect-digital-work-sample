@@ -87,6 +87,13 @@ path {
   }
 }
 
+@media #{$phabletSide} {
+  h1 {
+    top: 10px;
+    font-size: 24px;
+  }
+}
+
 @keyframes _drop-in {
   0% {
     transform: translate(-50%, -25vh);

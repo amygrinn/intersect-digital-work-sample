@@ -93,6 +93,12 @@
     }
   }
 
+  @media #{$phabletSide} {
+    .movie-trailer-container {
+      width: 100%;
+    }
+  }
+
 </style>
 
 
