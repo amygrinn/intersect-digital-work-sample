@@ -1,7 +1,7 @@
 <template>
 <div>
+  <div class="header-background"></div>
   <svg class="header" viewBox="0 0 100 100" preserveAspectRatio="none">
-    <rect class="header-background" x="0" y="0"/>
     <path d="M0,0 q50,0 100,0 Z">
       <animate
         attributeName="d"
@@ -50,10 +50,13 @@
 }
 
 .header-background {
-  fill: $primary;
-  stroke: none;
-  width: 100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: $primary;
+  width: 100vw;
   height: 40px;
+  z-index: 1;
 }
 
 h1 {
@@ -80,7 +83,7 @@ path {
     top: 10px;
   }
   .header-background {
-    height: 70px;
+    height: 100px;
   }
 }
 

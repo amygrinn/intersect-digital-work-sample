@@ -11,15 +11,15 @@
     <h1>{{video.title}}</h1>
     <div class="statistics">
       <div class="statistic">
-        <h4>{{video.statistics.viewCount}} views</h4>
+        <h4>{{video.statistics.viewCount | numeric}} views</h4>
       </div>
       <div class="statistic">
         <img :src="require('@/assets/thumbs-up.svg')">
-        <h4>{{video.statistics.likeCount}}</h4>
+        <h4>{{video.statistics.likeCount | numeric}}</h4>
       </div>
       <div class="statistic">
         <img :src="require('@/assets/thumbs-down.svg')">
-        <h4>{{video.statistics.dislikeCount}}</h4>
+        <h4>{{video.statistics.dislikeCount | numeric}}</h4>
       </div>
     </div>
     <p>{{video.description}}</p>
@@ -101,6 +101,11 @@ import Vue from 'vue';
 import axios from 'axios';
 
 export default Vue.extend({
+  filters: {
+    numeric(n: number): string {
+      return (+n).toLocaleString();
+    },
+  },
   computed: {
     video() {
       return this.$store.state.videos[this.$route.params.id];
