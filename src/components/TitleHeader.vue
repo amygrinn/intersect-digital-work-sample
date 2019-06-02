@@ -83,7 +83,7 @@ path {
     top: 10px;
   }
   .header-background {
-    height: 100px;
+    height: 120px;
   }
 }
 
