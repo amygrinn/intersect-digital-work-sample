@@ -58,7 +58,7 @@
   transition: transform 300ms ease-out;
   padding-top: 50px;
   box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .sidebar img, .sidebar p {
