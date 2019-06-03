@@ -1,4 +1,5 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ZipPlugin = require('zip-webpack-plugin');
 
 class CopyIndexOutputFile {
 
@@ -32,7 +33,8 @@ module.exports = {
         analyzerMode: 'static',
         openAnalyzer: false,
       }),
-      new CopyIndexOutputFile('200.html')
+      new CopyIndexOutputFile('200.html'),
+      new ZipPlugin({filename: 'work-sample-tyler-grinn.zip'})
     ]
   }
 }
