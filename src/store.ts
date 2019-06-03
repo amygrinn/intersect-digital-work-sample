@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
 
-import trailers from './trailers';
+import { trailerIds } from './trailers';
 
 import axios from 'axios';
 
@@ -32,7 +32,7 @@ export default new Vuex.Store<{ videos: { [id: string]: Video } }>({
       const { data: { items }} =
         await axios.get('https://www.googleapis.com/youtube/v3/videos', {
           params: {
-            id: trailers.join(','),
+            id: trailerIds,
             part: 'snippet,statistics',
             key: 'AIzaSyCf7-i07F-yVYR02mKM_LN9HxvIuXbJA_g',
           },
