@@ -15,8 +15,10 @@
       @click="gotoVideo(video.id)">
       <img
         :src="video.thumbnail.url"
-        :height="video.thumbnail.height"
-        :width="video.thumbnail.width">
+        :style="`
+          width: ${video.thumbnail.width};
+          height: ${video.thumbnail.height};
+        `">
       <p>{{video.title}}</p>
     </div>
   </div>
