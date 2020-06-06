@@ -12,12 +12,12 @@ cache:
     # Required by cypress
     - ~/.cache
 
-install: npm ci
+install: yarn
 
 script:
-  - npm run lint
-  - npm run test
-  - npm run build
+  - yarn lint
+  - yarn test
+  - yarn build
 
 deploy:
   provider: surge
