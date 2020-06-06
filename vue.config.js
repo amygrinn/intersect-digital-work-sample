@@ -6,8 +6,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        includePaths: ['src', 'node_modules'],
-        data: `@import 'variables';\n`
+        sassOptions: {
+          includePaths: ['src', 'node_modules'],
+        },
+        prependData: `@import 'variables';\n`
       }
     }
   },
