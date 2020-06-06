@@ -7,7 +7,7 @@ addons:
       - libgconf-2-4
 
 cache:
-  npm: true
+  yarn: true
   directories:
     # Required by cypress
     - ~/.cache
